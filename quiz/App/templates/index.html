@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form{
+            width: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg,yellow,red);
+        }
+        .question{
+            background-color: yellow;
+            background: linear-gradient(45deg,rgb(250, 120, 126),transparent);
+            margin: 20px 0px;
+            padding: 20px;
+            border-radius: 20px;
+            width: 50%;
+        }
+        h4{
+            display: flex;justify-content: space-between;
+            align-items: center;
+        }
+        h1{
+            
+            background: linear-gradient(45deg,rgb(220, 126, 184),rgb(10, 138, 106));
+         -webkit-text-fill-color: transparent;
+         -webkit-background-clip: text;
+        }
+    #circle{
+        width: 200px;
+        height: 200px;
+        display: flex;justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background: linear-gradient(transparent,rgb(200, 150, 300));
+        color: white;
+        border: 2px solid black;
+        color: white;
+    }
+    input{
+        padding: 10px;
+        width: 40%;
+        border-radius: 20px;
+
+    }
+    #score{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: whitesmoke;
+        font-weight: 800;
+    }
+    </style>
+</head>
+<body>
+
+
+    {% block content %}
+    <h1>Home</h1>
+    <form action="" method="POST">
+        <h2 id="circle">Time  : <div id="timer">0</div></h2>
+        {% csrf_token %}
+    {% for q in question %}
+    
+    
+        <div class="question">
+            <h3>{{q.Question}}</h3>
+    <h4><label for="">{{q.op1}}</label>
+        <input type="radio" name="{{q.Question}}" value="{{q.op1}}" checked>
+    </h4>
+   <h4>
+    <label for="">{{q.op2}}</label>
+    <input type="radio" name="{{q.Question}}" value="{{q.op2}}" >
+   </h4>
+   <h4>
+    <label for="">{{q.op3}}</label>
+    <input type="radio" name="{{q.Question}}" value="{{q.op3}}" >
+   </h4>
+   <h4>
+    <label for="">{{q.op4}}</label>
+    <input type="radio" name="{{q.Question}}" value="{{q.op4}}" >
+   </h4>
+
+        </div>
+
+    
+    
+    
+    {% endfor %}
+
+   <input type="number" name="timer" id="time">
+    <button type="submit">Submit</button>
+</form>
+    {% endblock %}
+
+    <script>
+        let timer=document.getElementById('timer')
+        let time=document.getElementById('time')
+        let counter=0
+      setInterval(() => {
+        counter++
+        timer.innerHTML=`${counter}`
+        time.value=counter
+      }, 1000);
+    </script>
+</body>
+</html>
